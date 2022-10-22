@@ -1,8 +1,13 @@
 const fs = require("fs");
+const axios = require("axios");
 const { parse } = require("json2csv");
 const MultiSet = require("mnemonist/multi-set");
 
-const NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH = 200;
+const NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH = 5;
+
+const SEMANTIC_SCHOLAR_BASE_URL =
+  "https://api.semanticscholar.org/graph/v1/paper/";
+const SEMANTIC_SCHOLAR_TIMEOUT = 4 * 1000;
 
 function compare(a, b) {
   if (a.frequency < b.frequency) return 1;
@@ -26,36 +31,8 @@ const updateCSV = (papers) => {
   ];
   const opts = { fields };
   const csvData = parse(papers, opts);
-  fs.writeFileSync("./data/currentPapers.csv", csvData, "utf8");
+  fs.writeFileSync("./data/candidatePapers.csv", csvData, "utf8");
   console.log("Wrote papers successfully.");
-};
-
-const fetchPaper = async (paperId) => {
-  var rec = {};
-  var authors = [];
-  var response = await axios.get(
-    SEMANTIC_SCHOLAR_BASE_URL +
-      "URL:https://www.semanticscholar.org/paper/" +
-      paperId,
-    {
-      params: {
-        fields:
-          "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year",
-      },
-    }
-  );
-  rec.id = response.data.paperId;
-  rec.url = response.data.url;
-  rec.citationCount = response.data.citationCount;
-  rec.influentialCitationCount = response.data.influentialCitationCount;
-  rec.referenceCount = response.data.referenceCount;
-  rec.summary = response.data.tldr.text;
-  rec.title = response.data.title;
-  rec.venue = response.data.venue;
-  rec.year = response.data.year;
-  response.data.authors.forEach((obj) => authors.push(obj.name));
-  rec.authors = String(authors);
-  return rec;
 };
 
 const getCandidatePapers = async () => {
@@ -76,31 +53,65 @@ const getCandidatePapers = async () => {
 
     var res = [];
     paperIDs.forEachMultiplicity(function (count, key) {
-      res.push({
-        id: key,
-        paperLink: "https://www.semanticscholar.org/paper/" + key,
-        frequency: count,
-      });
+      // To filter out the 'null' key
+      if (key) {
+        res.push({
+          id: key,
+          paperLink: "https://www.semanticscholar.org/paper/" + key,
+          frequency: count,
+        });
+      }
     });
     res.sort(compare);
-    console.log("Ranked papers successfully.");
+    console.log("Ranked papers successfully.\n");
 
     papersToAdd = [];
 
     for (
-      var i = 0;
+      let i = 0;
       i < Math.min(NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH, res.length);
       i++
     ) {
-      console.log("Processing paper number " + (i + 1));
-      var obj = await fetchPaper(res[i].id);
-      obj.paperLink = res[i].paperLink;
-      obj.score = res[i].frequency;
-      papersToAdd.push(res);
-      console.log("Processed successfully.\n");
+      setTimeout(() => {
+        console.log("Processing paper number " + (i + 1));
+        var rec = {};
+        var authors = [];
+        axios
+          .get(
+            SEMANTIC_SCHOLAR_BASE_URL +
+              "URL:https://www.semanticscholar.org/paper/" +
+              res[i].id,
+            {
+              params: {
+                fields:
+                  "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year",
+              },
+            }
+          )
+          .then((response) => {
+            rec.id = response.data.paperId;
+            rec.url = response.data.url;
+            rec.citationCount = response.data.citationCount;
+            rec.influentialCitationCount =
+              response.data.influentialCitationCount;
+            rec.referenceCount = response.data.referenceCount;
+            rec.summary = response.data.tldr.text;
+            rec.title = response.data.title;
+            rec.venue = response.data.venue;
+            rec.year = response.data.year;
+            response.data.authors.forEach((obj) => authors.push(obj.name));
+            rec.authors = String(authors);
+            rec.paperLink = res[i].paperLink;
+            rec.score = res[i].frequency;
+            papersToAdd.push(rec);
+            console.log("Processed successfully.\n");
+          });
+      }, SEMANTIC_SCHOLAR_TIMEOUT * i);
     }
 
-    updateCSV(papersToAdd);
+    setTimeout(() => {
+      updateCSV(papersToAdd);
+    }, SEMANTIC_SCHOLAR_TIMEOUT * (5 + Math.min(NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH, res.length)));
   });
 };
 

@@ -11,7 +11,6 @@ const papersToAdd = fs
   .split(/\r?\n/);
 var currentPapers = [];
 var currentPaperIDs = [];
-currentPapers.forEach((paper) => currentPaperIDs.push(paper.id));
 var leftPapers = [];
 
 const getIdentifierFromURL = (url) => {
@@ -38,12 +37,13 @@ const getIdentifierFromURL = (url) => {
   return null;
 };
 
-const getCurrentRecords = async () => {
-  fs.readFile("./data/records.json", "utf8", (err, jsonString) => {
+const getCurrentRecords = () => {
+  fs.readFileSync("./data/records.json", "utf8", (err, jsonString) => {
     if (err) throw new Error("Error reading current records file from disk");
     papers = JSON.parse(jsonString);
     currentPapers = papers.papers;
   });
+  currentPapers.forEach((paper) => currentPaperIDs.push(paper.id));
 };
 
 const updateCSV = () => {
@@ -70,9 +70,10 @@ const cleanup = () => {
   var jsonContent = JSON.stringify({
     papers: currentPapers,
   });
+
   fs.writeFileSync("./data/records.json", jsonContent, "utf8", (err) => {
     if (err) throw new Error("Could not write data to records.json");
-    else console.log("Updated records.json suucessfully.");
+    console.log("Updated records.json sucessfully.");
   });
 
   if (leftPapers.length != 0) {
@@ -142,7 +143,7 @@ const addPapers = () => {
 };
 
 const controlFunction = async () => {
-  await getCurrentRecords();
+  getCurrentRecords();
   addPapers();
 };
 
