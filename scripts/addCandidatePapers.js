@@ -27,7 +27,6 @@ const updateCSV = (papers) => {
     "referenceCount",
     "influentialCitationCount",
     "url",
-    "paperLink",
   ];
   const opts = { fields };
   const csvData = parse(papers, opts);
@@ -101,7 +100,6 @@ const getCandidatePapers = async () => {
             rec.year = response.data.year;
             response.data.authors.forEach((obj) => authors.push(obj.name));
             rec.authors = String(authors);
-            rec.paperLink = res[i].paperLink;
             rec.score = res[i].frequency;
             papersToAdd.push(rec);
             console.log("Processed successfully.\n");
