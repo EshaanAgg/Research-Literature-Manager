@@ -1,5 +1,5 @@
 {
-  "name": "literatute-management",
+  "name": "research-literature-manager",
   "version": "1.0.0",
   "description": "A simple way to manage and store the data related to all your research papers!",
   "main": "index.js",
