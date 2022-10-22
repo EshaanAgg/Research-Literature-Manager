@@ -1,13 +1,16 @@
 const fs = require("fs");
 const axios = require("axios");
 
-const SEMANTIC_SCHOLAR_BASE_URL = "https://api.semanticscholar.org/graph/v1/paper/";
-const SEMANTIC_SCHOLAR_TIMEOUT = 3.5 * 1000;
+const SEMANTIC_SCHOLAR_BASE_URL =
+  "https://api.semanticscholar.org/graph/v1/paper/";
+const SEMANTIC_SCHOLAR_TIMEOUT = 4 * 1000;
 
-const papersToAdd = fs.readFileSync("./papersToAdd.txt", "utf-8").split(/\r?\n/);
+const papersToAdd = fs
+  .readFileSync("./papersToAdd.txt", "utf-8")
+  .split(/\r?\n/);
 var currentPapers = [];
 var currentPaperIDs = [];
-currentPapers.forEach((paper) => currentPaperIDs.push(paper.id)) 
+currentPapers.forEach((paper) => currentPaperIDs.push(paper.id));
 var leftPapers = [];
 
 const getIdentifierFromURL = (url) => {
@@ -43,43 +46,47 @@ const getCurrentRecords = async () => {
 };
 
 const cleanup = () => {
-    // Update records.json
-    var jsonContent = JSON.stringify({
-        papers: currentPapers
-    });
-    fs.writeFileSync("./data/records.json", jsonContent, "utf8", (err) => {
-        if (err) throw new Error("Could not write data to records.json");
-        else console.log("Updated records.json suucessfully.");
-    })
+  console.log("\n\nSaving papers.....\n\n");
+  // Update records.json
+  var jsonContent = JSON.stringify({
+    papers: currentPapers,
+  });
+  fs.writeFileSync("./data/records.json", jsonContent, "utf8", (err) => {
+    if (err) throw new Error("Could not write data to records.json");
+    else console.log("Updated records.json suucessfully.");
+  });
+  console.log(leftPapers);
 
-    // Update filesToAdd.txt
-    fs.writeFileSync("./papersToAdd.txt", leftPapers.join("\r\n"), "utf8");
-}
+  // Update filesToAdd.txt
+  fs.writeFileSync("./papersToAdd.txt", leftPapers.join("\r\n"), "utf8");
+};
 
 const addPapers = () => {
   papersToAdd.forEach((pageLink, index) => {
     setTimeout(() => {
-      console.log(`Proceessing paper number ${index + 1}`);
+      console.log(`Processing paper number ${index + 1}`);
       var identifier = getIdentifierFromURL(pageLink);
 
       if (identifier) {
         var rec = {};
         var authors = [];
 
-        axios.get(SEMANTIC_SCHOLAR_BASE_URL + identifier,{
-              params: {
-                fields: "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year,citations,references",
-              },
-            }
-          )
-            .then((response) => {
-            rec.id = response.data.paperId,
-            rec.url = response.data.url,
+        axios
+          .get(SEMANTIC_SCHOLAR_BASE_URL + identifier, {
+            params: {
+              fields:
+                "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year,citations,references",
+            },
+          })
+          .then((response) => {
+            rec.id = response.data.paperId;
+            rec.url = response.data.url;
             rec.citationCount = response.data.citationCount;
-            rec.influentialCitationCount = response.data.influentialCitationCount;
-            rec.referenceCount = response.data.referenceCount,
-            rec.citations = response.data.citations,
-            rec.references = response.data.references, 
+            rec.influentialCitationCount =
+              response.data.influentialCitationCount;
+            rec.referenceCount = response.data.referenceCount;
+            rec.citations = response.data.citations;
+            rec.references = response.data.references;
             rec.summary = response.data.tldr.text;
             rec.title = response.data.title;
             rec.venue = response.data.venue;
@@ -89,27 +96,28 @@ const addPapers = () => {
 
             // Add paper to the global list
             if (!currentPaperIDs.includes(rec.id)) {
-                currentPaperIDs.push(rec.id);
-                currentPapers.push(rec);    
-            }  
+              currentPaperIDs.push(rec.id);
+              currentPapers.push(rec);
+            }
+            console.log("Paper details fetched successfully.\n");
           })
-            .catch((_) => {
-                console.log("This paper does not exist in Semantic Scholar.")
-                leftPapers.push(leftPapers);
-            });
-      } else
-        console.log("This paper link could not be associated with Semantic Scholar.\n");
-        leftPapers.push(leftPapers);
-        
+          .catch((_) => {
+            console.log("This paper does not exist in Semantic Scholar.\n");
+            leftPapers.push(pageLink);
+          });
+      } else {
+        console.log("This paper does not exist in Semantic Scholar.\n");
+        leftPapers.push(pageLink);
+      }
     }, SEMANTIC_SCHOLAR_TIMEOUT * index);
   });
 
-  setTimeout(cleanup, SEMANTIC_SCHOLAR_TIMEOUT * (5 + papersToAdd.length))
+  setTimeout(cleanup, SEMANTIC_SCHOLAR_TIMEOUT * papersToAdd.length);
 };
 
 const controlFunction = async () => {
-    await getCurrentRecords();
-    addPapers();
-}
+  await getCurrentRecords();
+  addPapers();
+};
 
 controlFunction();
