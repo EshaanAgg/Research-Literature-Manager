@@ -1,5 +1,6 @@
 const fs = require("fs");
 const axios = require("axios");
+const { parse } = require("json2csv");
 
 const SEMANTIC_SCHOLAR_BASE_URL =
   "https://api.semanticscholar.org/graph/v1/paper/";
@@ -45,6 +46,24 @@ const getCurrentRecords = async () => {
   });
 };
 
+const updateCSV = () => {
+  const fields = [
+    "paperId",
+    "title",
+    "tldr",
+    "venue",
+    "year",
+    "authors",
+    "citationCount",
+    "referenceCount",
+    "influentialCitationCount",
+    "url",
+  ];
+  const opts = { fields };
+  const csvData = parse(currentPapers, opts);
+  fs.writeFileSync("./data/currentPapers.csv", csvData, "utf8");
+};
+
 const cleanup = () => {
   console.log("\n\nSaving papers.....\n\n");
   // Update records.json
@@ -59,6 +78,9 @@ const cleanup = () => {
 
   // Update filesToAdd.txt
   fs.writeFileSync("./papersToAdd.txt", leftPapers.join("\r\n"), "utf8");
+
+  // Update currentPapers.csv
+  updateCSV();
 };
 
 const addPapers = () => {
