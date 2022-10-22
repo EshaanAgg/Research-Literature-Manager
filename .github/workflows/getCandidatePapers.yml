@@ -1,4 +1,4 @@
-name: "Add Papers"
+name: "Add Candidate Papers"
 
 on:
   schedule:
