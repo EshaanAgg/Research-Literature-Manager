@@ -5,7 +5,11 @@ This is a project that makes it simple to manage the research papers you have re
 ## How to use
 
 1. Fork this repository to your own account.
-2. Open the file `papersToAdd.txt` in the GitHub editor, and paste the links of the papers you want to add in the file (one link in each line) and commit the chanegs.
+2. Go to the `Actions` tab and enable running of the workflows (they are disabled by default for forked repositories). Click on `I understand my workflows, go ahead and enable them`.
+   ![Enable Actions - 1](assets/1.jpg)
+3. In the `Actions` tab itself, go to each of the two workflows, namely `Add Candidate Papers` and `Add Papers`, and enable they manually if they are disabled.
+   ![Enable Actions - 2](assets/2.jpg)
+4. Open the file `papersToAdd.txt` in the GitHub editor, and paste the links of the papers you want to add in the file (one link in each line) and commit the chanegs.
 
 After this, automated actions with fire which will use Semantic Scholar to fetch details about those papers, and then subsequently fetch some candidate papers which might be relevant to your project.
 
@@ -13,7 +17,7 @@ After the actions are complete, you can explore the `data` folder, which will ha
 
 - `records.json`: Contains all the information about the papers that you added.
 - `currentPapers.csv`: Contains formatted information about the papers currently in the database.
-- `candidatePapers.csn`: Contains formatted information about possible candidate papers for your database.
+- `candidatePapers.csv`: Contains formatted information about possible candidate papers for your database.
 
 ### Note
 

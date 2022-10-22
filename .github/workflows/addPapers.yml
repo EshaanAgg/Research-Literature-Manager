@@ -3,7 +3,7 @@ name: "Add Papers"
 on:
   push:
     paths:
-      - ./papersToAdd.txt
+      - "**.txt"
 
 jobs:
   build:

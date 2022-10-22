@@ -3,7 +3,7 @@ const axios = require("axios");
 const { parse } = require("json2csv");
 const MultiSet = require("mnemonist/multi-set");
 
-const NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH = 5;
+const NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH = 200;
 
 const SEMANTIC_SCHOLAR_BASE_URL =
   "https://api.semanticscholar.org/graph/v1/paper/";

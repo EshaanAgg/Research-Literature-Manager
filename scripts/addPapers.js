@@ -76,13 +76,14 @@ const cleanup = () => {
     console.log("Updated records.json sucessfully.");
   });
 
-  if (leftPapers.length != 0) {
+  var leftoverPapers = leftPapers.filter((paper) => paper != "");
+  if (leftoverPapers.length != 0) {
     console.log("\nThese papers could not be processed:");
-    console.log(leftPapers);
+    console.log(leftoverPapers);
     console.log("Try supplying different links for these papers.");
   }
   // Update filesToAdd.txt
-  fs.writeFileSync("./papersToAdd.txt", leftPapers.join("\r\n"), "utf8");
+  fs.writeFileSync("./papersToAdd.txt", leftoverPapers.join("\r\n"), "utf8");
 
   // Update currentPapers.csv
   updateCSV();
