@@ -1,0 +1,32 @@
+name: 'Add Papers'
+
+on:
+  push:
+    paths:
+      - ./papersToAdd.txt
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with: 
+          node-version: '14.x'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Fetch paper details and add the papers to the system
+        run: node ./scripts/addPapers.js
+          
+      - name: Commit changes to records.json
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: EshaanAgg
+          author_email: eshaan.aggarwal.cse21@itbhu.ac.in
+          message: 'Add new papers'
