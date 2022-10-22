@@ -1,29 +1,16 @@
 const fs = require("fs");
 const { parse } = require("json2csv");
+const MultiSet = require("mnemonist/multi-set");
 
 function compare(a, b) {
-  if (a.score < b.score) return 1;
+  if (a.frequency < b.frequency) return 1;
   else return -1;
 }
 
-var allPapers = [];
-
-const updateCSV = () => {
-  const fields = [
-    "id",
-    "title",
-    "summary",
-    "venue",
-    "year",
-    "authors",
-    "citationCount",
-    "referenceCount",
-    "influentialCitationCount",
-    "url",
-    "score",
-  ];
+const updateCSV = (res) => {
+  const fields = ["paperLink", "frequency"];
   const opts = { fields };
-  const csvData = parse(allPapers, opts);
+  const csvData = parse(res, opts);
   fs.writeFileSync("./data/candidatePapers.csv", csvData, "utf8");
 };
 
@@ -33,26 +20,25 @@ const getCandidatePapers = () => {
       throw new Error("Error reading file : records.json");
     }
 
-    allPapers = JSON.parse(jsonString).papers;
-    var allPaperIDs = [];
-    allPapers.forEach((page) => allPaperIDs.push(paper.id));
+    var orgPapers = JSON.parse(jsonString).papers;
+    var paperIDs = MultiSet.from([]);
 
-    allPapers.forEach((paper) => {
-      var citationScore = 0;
-      var referenceScore = 0;
-      paper.citations.forEach((citation) => {
-        if (allPaperIDs.includes(citation.paperId)) citationScore += 1;
-      });
-      paper.references.forEach((reference) => {
-        if (allPaperIDs.includes(reference.paperId)) referenceScore += 1;
-      });
-      paper.score =
-        citationScore / paper.citationCount +
-        referenceScore / paper.referenceCount;
+    orgPapers.forEach((paper) => {
+      paper.citations.forEach((citation) => paperIDs.add(citation.paperId));
+      paper.references.forEach((reference) => paperIDs.add(reference.paperId));
     });
 
-    allPapers.sort(compare);
-    updateCSV();
+    orgPapers.forEach((ele) => paperIDs.delete(ele.id));
+
+    var res = [];
+    paperIDs.forEachMultiplicity(function (count, key) {
+      res.push({
+        paperLink: "https://www.semanticscholar.org/paper/" + key,
+        frequency: count,
+      });
+    });
+    res.sort(compare);
+    updateCSV(res);
   });
 };
 
