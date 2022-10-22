@@ -107,5 +107,9 @@ const addPapers = () => {
   setTimeout(cleanup, SEMANTIC_SCHOLAR_TIMEOUT * (5 + papersToAdd.length))
 };
 
-await getCurrentRecords();
-addPapers();
+const controlFunction = async () => {
+    await getCurrentRecords();
+    addPapers();
+}
+
+controlFunction();
