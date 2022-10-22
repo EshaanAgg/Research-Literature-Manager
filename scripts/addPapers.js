@@ -48,9 +48,9 @@ const getCurrentRecords = async () => {
 
 const updateCSV = () => {
   const fields = [
-    "paperId",
+    "id",
     "title",
-    "tldr",
+    "summary",
     "venue",
     "year",
     "authors",
@@ -74,8 +74,12 @@ const cleanup = () => {
     if (err) throw new Error("Could not write data to records.json");
     else console.log("Updated records.json suucessfully.");
   });
-  console.log(leftPapers);
 
+  if (leftPapers.length != 0) {
+    console.log("\nThese papers could not be processed:");
+    console.log(leftPapers);
+    console.log("Try supplying different links for these papers.");
+  }
   // Update filesToAdd.txt
   fs.writeFileSync("./papersToAdd.txt", leftPapers.join("\r\n"), "utf8");
 
