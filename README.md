@@ -4,6 +4,8 @@ This is a project that makes it simple to manage the research papers you have re
 
 ## How to use
 
+### Setting up the Repository
+
 1. Click on the `Use this template` button to make a copy of this repository to your own Github account.
    ![Use this template button](assets/1.jpg)
 2. Open the file `papersToAdd.txt` in the GitHub editor, and paste the links of the papers you want to add in the file (one link in each line) and commit the chanegs.
@@ -15,6 +17,29 @@ After the actions are complete, you can explore the `data` folder, which will ha
 - `records.json`: Contains all the information about the papers that you added.
 - `currentPapers.csv`: Contains formatted information about the papers currently in the database.
 - `candidatePapers.csv`: Contains formatted information about possible candidate papers for your database.
+
+### Setting up the website
+
+The projects ships with a simple website that you can use to easily view and visualise the papers you have listed. We will use `Netlify` to deploy the website once, which would then be updated automatically on every subsequent commit by Netlify's servers!
+
+1. Go to [Netlify](https://www.netlify.com/) and Sign Up/Login with your Github Account.
+   ![Step 1](assets/website/1.jpg)
+2. Netlify will ask you to allow access to your Github account (if you are using Netlify for the first time). Go ahead and grant it, it's 100% safe!
+   ![Step 2](assets/website/2.jpg)
+3. On your Netlify dashboard, click on `Import from Git` under the `Sites` section and choose `Github` as your provider.
+   ![Step 3-A](assets/website/3.jpg)
+   ![Step 3-B](assets/website/4.jpg)
+4. In the `Pick your repository` step, choose the repository that you created from the template in the previous step.
+   ![Step 4](assets/website/5.jpg)
+5. In the next `Basic Build Settings` page, ensure that your settings are configured to these (these should be automatically be filled for you, but it never hurts to double check)!
+   ![Step 5](assets/website/6.jpg)
+6. Wait for Netlify to deploy your site! After the deployment is complete, your site would get a public URL that you can bookmark and use to view your papers any time!
+   ![Step 6](assets/website/7.jpg)
+
+##### Optional Step
+
+You can go to your `Site Settings`, and then under the `Domain Management` Section, you can click on the `Domains` option to edit your randomly generated site name to something a little more you!
+![Optional Step](assets/website/8.jpg)
 
 ### Note
 
