@@ -7,8 +7,12 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import "./assets/main.css";
 
 // Using icons
-import { faAnglesLeft, faHome } from "@fortawesome/free-solid-svg-icons";
-library.add([faAnglesLeft, faHome]);
+import {
+  faAnglesLeft,
+  faHome,
+  faBook,
+} from "@fortawesome/free-solid-svg-icons";
+library.add([faAnglesLeft, faHome, faBook]);
 
 const app = createApp(App);
 app.use(router).component("fontAwesomeIcon", FontAwesomeIcon).mount("#app");

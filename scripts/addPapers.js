@@ -40,7 +40,7 @@ const getIdentifierFromURL = (url) => {
 const getCurrentRecords = () => {
   fs.readFileSync("./data/records.json", "utf8", (err, jsonString) => {
     if (err) throw new Error("Error reading current records file from disk");
-    papers = JSON.parse(jsonString);
+    var papers = JSON.parse(jsonString);
     currentPapers = papers.papers;
   });
   currentPapers.forEach((paper) => currentPaperIDs.push(paper.id));

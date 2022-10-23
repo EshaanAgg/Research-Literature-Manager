@@ -14,6 +14,7 @@ import SidebarLink from "./SidebarLink.vue";
     </h1>
 
     <SidebarLink to="/" icon="home">Home</SidebarLink>
+    <SidebarLink to="/papers" icon="book">My Papers</SidebarLink>
 
     <span
       class="collapse-icon"
