@@ -11,8 +11,9 @@ import {
   faAnglesLeft,
   faHome,
   faBook,
+  faQuestionCircle,
 } from "@fortawesome/free-solid-svg-icons";
-library.add([faAnglesLeft, faHome, faBook]);
+library.add([faAnglesLeft, faHome, faBook, faQuestionCircle]);
 
 const app = createApp(App);
 app.use(router).component("fontAwesomeIcon", FontAwesomeIcon).mount("#app");

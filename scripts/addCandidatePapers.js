@@ -14,6 +14,22 @@ function compare(a, b) {
   else return -1;
 }
 
+const updateJSON = (papers) => {
+  var jsonContent = JSON.stringify({
+    papers: papers,
+  });
+
+  fs.writeFileSync(
+    "./data/candidateRecords.json",
+    jsonContent,
+    "utf8",
+    (err) => {
+      if (err) throw new Error("Could not write data to records.json");
+      console.log("Updated candidateRecords.json sucessfully.");
+    }
+  );
+};
+
 const updateCSV = (papers) => {
   const fields = [
     "id",
@@ -109,6 +125,7 @@ const getCandidatePapers = async () => {
 
     setTimeout(() => {
       updateCSV(papersToAdd);
+      updateJSON(papersToAdd);
     }, SEMANTIC_SCHOLAR_TIMEOUT * (5 + Math.min(NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH, res.length)));
   });
 };

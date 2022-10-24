@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import CandidatePapers from "../views/CandidatePapers.vue";
 import HomeView from "../views/HomeView.vue";
 import PaperView from "../views/PaperView.vue";
 
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/papers",
       name: "papers",
       component: PaperView,
+    },
+    {
+      path: "/candidate",
+      name: "candidate-papers",
+      component: CandidatePapers,
     },
   ],
 });
