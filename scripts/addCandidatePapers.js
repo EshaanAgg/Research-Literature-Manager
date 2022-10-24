@@ -28,6 +28,11 @@ const updateJSON = (papers) => {
       console.log("Updated candidateRecords.json sucessfully.");
     }
   );
+  fs.writeFileSync(
+    "./website/src/assets/data/candidateRecords.json",
+    jsonContent,
+    "utf-8"
+  );
 };
 
 const updateCSV = (papers) => {

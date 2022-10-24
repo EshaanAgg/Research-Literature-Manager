@@ -16,8 +16,6 @@
 
   # Default build command.
   command = "npm install && npm run build"
-  # Rewriting the ignore build again settings
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ./.. ."
 
 [[plugins]]
   # Installs the Lighthouse Build Plugin for all deploy contexts

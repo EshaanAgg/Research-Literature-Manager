@@ -75,6 +75,11 @@ const cleanup = () => {
     if (err) throw new Error("Could not write data to records.json");
     console.log("Updated records.json sucessfully.");
   });
+  fs.writeFileSync(
+    "./website/src/assets/data/records.json",
+    jsonContent,
+    "utf-8"
+  );
 
   var leftoverPapers = leftPapers.filter((paper) => paper != "");
   if (leftoverPapers.length != 0) {

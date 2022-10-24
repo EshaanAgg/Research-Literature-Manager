@@ -36,7 +36,7 @@
 <script setup>
 import { AgGridVue } from "ag-grid-vue3";
 import { onMounted, ref } from "vue";
-import recordsData from "./../../../data/candidateRecords.json";
+import recordsData from "./../assets/data/candidateRecords.json";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
