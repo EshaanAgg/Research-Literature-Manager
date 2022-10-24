@@ -65,7 +65,7 @@ const columnDefs = ref({
       minWidth: 60,
       maxWidth: 100,
     },
-    { field: "summary" },
+    { field: "summary", minWidth: 200 },
     { field: "authors" },
   ],
 });
@@ -102,7 +102,7 @@ const handleSelection = () => {
 <style>
 .selectionButton {
   appearance: button;
-  background-color: #1899d6;
+  background-color: var(--sidebar-item-active);
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -136,7 +136,7 @@ const handleSelection = () => {
 
 .selectionButton:after {
   background-clip: padding-box;
-  background-color: #1cb0f6;
+  background-color: var(--sidebar-item-hover);
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
