@@ -31,8 +31,7 @@ The projects ships with a simple website that you can use to easily view and vis
    ![Step 3-B](assets/website/4.jpg)
 4. In the `Pick your repository` step, choose the repository that you created from the template in the previous step.
    ![Step 4](assets/website/5.jpg)
-5. In the next `Basic Build Settings` page, ensure that your settings are configured to these (these should be automatically be filled for you, but it never hurts to double check)!
-   ![Step 5](assets/website/6.jpg)
+5. In the next `Basic Build Settings` page, select `Deploy site` button!
 6. Wait for Netlify to deploy your site! After the deployment is complete, your site would get a public URL that you can bookmark and use to view your papers any time!
    ![Step 6](assets/website/7.jpg)
 
