@@ -41,6 +41,19 @@ The projects ships with a simple website that you can use to easily view and vis
 You can go to your `Site Settings`, and then under the `Domain Management` Section, you can click on the `Domains` option to edit your randomly generated site name to something a little more you!
 ![Optional Step](assets/website/8.jpg)
 
+### Using the site
+
+You can access the various sections of the site using the side navigation.
+There are two primary pages:
+
+1. `Current Papers`: This view shows all the current papers that are present in the database with some basic information about them.
+2. `Candidate Papers`: This view lists all the prospective papers that the scripts have calculated on the basis of the papers already present in the system.
+
+You can use the checkboxes in the `Candidate Papers` view to select the papers that you actually want to add to your list, and then click the `Add these papers` button. This would copy the paper details to your clipboard, which they you can directly paste in the `papersToAdd.txt` in your repository.
+
+The scripts would then automatically start running, and get a new set of candidate papers to be added in your database.
+Since we are using GitHub, proper versioning of all the papers happens automatically in form of commits, and thus you can always rollback to your older versions if you want.
+
 ### Note
 
 If some papers could not be found using the links provided, those papers would be left in the `papersToAdd.txt` itself. You can try replacing them with some other link to add them to the database using the scripts.
