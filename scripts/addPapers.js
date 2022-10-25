@@ -66,7 +66,7 @@ const updateCSV = () => {
 
 const cleanup = () => {
   console.log("\n\nSaving papers.....\n\n");
-  // Update records.json
+
   var jsonContent = JSON.stringify({
     papers: currentPapers,
   });
@@ -78,7 +78,7 @@ const cleanup = () => {
   fs.writeFileSync(
     "./website/src/assets/data/records.json",
     jsonContent,
-    "utf-8"
+    "utf8"
   );
 
   var leftoverPapers = leftPapers.filter((paper) => paper != "");
