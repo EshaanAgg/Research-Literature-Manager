@@ -98,7 +98,7 @@ const getCandidatePapers = async () => {
           var authors = [];
 
           rec.id = response.data.paperId;
-          if (response.data.tldr.text) rec.summary = response.data.tldr.text;
+          if (response.data.tldr) rec.summary = response.data.tldr.text;
           else rec.summary = "";
           response.data.authors.forEach((obj) => authors.push(obj.name));
           rec.authors = String(authors);
