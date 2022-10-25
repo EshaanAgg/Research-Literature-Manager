@@ -1,6 +1,7 @@
 name: "Add Papers"
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "**.txt"
