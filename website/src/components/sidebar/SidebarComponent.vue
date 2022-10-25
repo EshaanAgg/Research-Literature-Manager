@@ -1,16 +1,17 @@
 <script setup>
 import { collapsed, toggleSidebar, sidebarWidth } from "./state";
 import SidebarLink from "./SidebarLink.vue";
+import constants from "../../../constants.json";
 </script>
 
 <template>
   <div class="sidebar" :style="{ width: sidebarWidth }">
     <h1>
       <span v-if="collapsed">
-        <div>L</div>
-        <div>M</div>
+        <div>{{ constants["navbar-name-abbreviation"][0] }}</div>
+        <div>{{ constants["navbar-name-abbreviation"][1] }}</div>
       </span>
-      <span v-else> Literature Manager </span>
+      <span v-else> {{ constants["navbar-name"] }} </span>
     </h1>
 
     <SidebarLink to="/" icon="home">Home</SidebarLink>

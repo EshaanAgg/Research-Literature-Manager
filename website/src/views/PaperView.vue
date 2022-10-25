@@ -28,6 +28,9 @@ import { onMounted, ref } from "vue";
 import recordsData from "./../assets/data/records.json";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import constants from "../../constants.json";
+
+document.title = `${constants["website-title"]} | Papers`;
 
 const rowData = ref([]);
 

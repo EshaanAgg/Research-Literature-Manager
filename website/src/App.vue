@@ -5,8 +5,12 @@ import { sidebarWidth } from "@/components/sidebar/state";
 </script>
 
 <template>
-  <SidebarComponent></SidebarComponent>
-  <div :style="{ 'margin-left': sidebarWidth }"><RouterView></RouterView></div>
+  <div>
+    <SidebarComponent></SidebarComponent>
+    <div :style="{ 'margin-left': sidebarWidth }">
+      <RouterView></RouterView>
+    </div>
+  </div>
 </template>
 
 <style>

@@ -39,6 +39,9 @@ import { onMounted, ref } from "vue";
 import recordsData from "./../assets/data/candidateRecords.json";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import constants from "../../constants.json";
+
+document.title = `${constants["website-title"]} | Candidate Papers`;
 
 const rowData = ref([]);
 const gridOptions = ref({});
@@ -64,6 +67,24 @@ const columnDefs = ref({
       width: 60,
       minWidth: 60,
       maxWidth: 100,
+    },
+    {
+      headerName: "Citation Count",
+      field: "citationCount",
+      width: 60,
+      minWidth: 60,
+    },
+    {
+      headerName: "Influential Citation Count",
+      field: "influentialCitationCount",
+      width: 60,
+      minWidth: 60,
+    },
+    {
+      headerName: "Reference Count",
+      field: "referenceCount",
+      width: 60,
+      minWidth: 60,
     },
     { field: "summary", minWidth: 200 },
     { field: "authors" },

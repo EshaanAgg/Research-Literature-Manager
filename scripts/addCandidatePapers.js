@@ -66,7 +66,6 @@ const getCandidatePapers = async () => {
 
     orgPapers.forEach((paper) => {
       paper.citations.forEach((citation) => paperIDs.add(citation.paperId));
-      paper.references.forEach((reference) => paperIDs.add(reference.paperId));
     });
 
     orgPapers.forEach((ele) => paperIDs.delete(ele.id));

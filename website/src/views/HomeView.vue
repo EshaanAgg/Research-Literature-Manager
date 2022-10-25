@@ -1,10 +1,12 @@
-<script setup></script>
+<script setup>
+import constants from "../../constants.json";
+document.title = `${constants["website-title"]} | Home`;
+</script>
 
 <template>
-  <h1>Literature Management System</h1>
-  <br />
-  <p>
-    This is a project that makes it simple to manage the research papers you
-    have read!
-  </p>
+  <div>
+    <h1>{{ constants["home-title"] }}</h1>
+    <br />
+    <p>{{ constants["home-description"] }}</p>
+  </div>
 </template>
