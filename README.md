@@ -110,6 +110,6 @@ https://arxiv.org/abs/2103.07191
 
 ### Contributors
 
-This project is developed and maintained by [Avijit Thawani](https://avi-jit.github.io/) and [Eshaan Aggarwal](www.github.com/EshaanAgg).
+This project is developed and maintained by [Avijit Thawani](https://avi-jit.github.io/) and [Eshaan Aggarwal](https://www.github.com/EshaanAgg).
 
 It also wouldn't have been possible without the [Semantic Scholar API](https://www.semanticscholar.org/product/api), [Notion API](https://notionapi.readme.io/) and [Github Actions](https://github.com/features/actions)!
