@@ -65,11 +65,16 @@ You can use the checkboxes in the `Candidate Papers` view to select the papers t
 The scripts would then automatically start running, and get a new set of candidate papers to be added in your database.
 Since we are using GitHub, proper versioning of all the papers happens automatically in form of commits, and thus you can always rollback to your older versions if you want.
 
-### Note
+### Notes
 
-If some papers could not be found using the links provided, those papers would be left in the `papersToAdd.txt` itself. You can try replacing them with some other link to add them to the database using the scripts.
+1. If some papers could not be found using the links provided, those papers would be left in the `papersToAdd.txt` itself. You can try replacing them with some other link to add them to the database using the scripts.
 
-The scripts and Semantic Scholar API works best with `arxiv` and `semanticScholar` links, so try to use them as much as possible.
+2. The scripts and Semantic Scholar API works best with `arxiv` and `semanticScholar` links, so try to use them as much as possible.
+
+3. You can change the number of candidate papers that are fetched in every workflow run. By default, the number of candidate papers fetched is set to 200. To change it, go to the file `scripts/addCandidatePapers.js` and change the value of `NUMBER_OF_CANDIDATE_PAPERS_TO_FETCH` in `line 1` to the required number.
+
+4. By default, new candidate papers are fetched whenever new papers are added to the repository and on the first of every month. You can even manually run the script to fetch the papers. To do so, go to the `Actions` tab on your repository, and then choose `Add Candidate Papers` workflow. Then click on the `Run workflow` to manually run it.
+   ![Manually run workflow](assets/manual_trigger.jpg)
 
 ### Sample Input
 
@@ -102,3 +107,9 @@ https://arxiv.org/abs/2102.13019
 https://arxiv.org/abs/2103.03874
 https://arxiv.org/abs/2103.07191
 ```
+
+### Contributors
+
+This project is developed and maintained by [Avijit Thawani](https://avi-jit.github.io/) and [Eshaan Aggarwal](www.github.com/EshaanAgg).
+
+It also wouldn't have been possible without the [Semantic Scholar API](https://www.semanticscholar.org/product/api), [Notion API](https://notionapi.readme.io/) and [Github Actions](https://github.com/features/actions)!
