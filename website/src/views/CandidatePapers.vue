@@ -1,11 +1,3 @@
-<style scoped>
-.papers-grid {
-  height: 500px;
-  padding-left: 50px;
-  padding-right: 50px;
-}
-</style>
-
 <template>
   <div>
     <h1>Candidate Papers</h1>
@@ -23,6 +15,7 @@
       :gridOptions="gridOptions"
     >
     </ag-grid-vue>
+    <div class="bottomText">Showing {{ recordsData.papers.length }} papers</div>
     <button
       @click="handleSelection"
       class="selectionButton"
@@ -57,7 +50,10 @@ const columnDefs = ref({
       cellRenderer: function (params) {
         return `<a href="${params.data.url}" target="_blank">${params.data.title}</a>`;
       },
+      wrapText: true,
+      autoHeight: true,
       checkboxSelection: true,
+      headerCheckboxSelection: true,
     },
     { field: "venue", minWidth: 80, width: 80, maxWidth: 120 },
     { field: "year", maxWidth: 80 },
@@ -86,8 +82,8 @@ const columnDefs = ref({
       width: 60,
       minWidth: 60,
     },
-    { field: "summary", minWidth: 200 },
-    { field: "authors" },
+    { field: "authors", wrapText: true, autoHeight: true, minWidth: 250 },
+    { field: "summary" },
   ],
 });
 
@@ -99,7 +95,6 @@ const defaultColDef = {
   flex: 1,
 };
 
-// Example load data from sever
 onMounted(() => {
   rowData.value = recordsData.papers;
 });
