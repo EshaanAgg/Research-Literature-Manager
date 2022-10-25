@@ -27,6 +27,4 @@ jobs:
       - name: Commit changes to records.json and currentPapers.csv
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: EshaanAgg
-          author_email: eshaan.aggarwal.cse21@itbhu.ac.in
           message: "Add new papers"

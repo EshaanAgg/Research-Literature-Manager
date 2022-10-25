@@ -30,6 +30,4 @@ jobs:
       - name: Commit changes to candidatePapers.csv
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: EshaanAgg
-          author_email: eshaan.aggarwal.cse21@itbhu.ac.in
           message: "Add new candidate papers"

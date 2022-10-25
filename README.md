@@ -38,8 +38,10 @@ The projects ships with a simple website that you can use to easily view and vis
    ![Step 6](assets/website/7.jpg)
 
 ### Customising the site content
+
 You can naviagte to the `webiste/constants.json` file and change the value of the following fields, which would be dynamically updated on the generated webiste.
-- `navbar-name` : The heading text that appears on the top of the side-nav-bar of the site.
+
+- `navbar-name`: The heading text that appears on the top of the side-nav-bar of the site.
 - `navbar-name-abbreviation`: A two letter word which appears on the top of the side-nav-bar in the collapsed form.-
 - `website-title`: The name that appears in the browser tab.
 - `home-title`: The heading that appears on the landing page (home page) of the webite.
@@ -54,6 +56,7 @@ You can go to your `Site Settings`, and then under the `Domain Management` Secti
 
 You can access the various sections of the site using the side navigation.
 There are two primary pages:
+
 1. `Current Papers`: This view shows all the current papers that are present in the database with some basic information about them.
 2. `Candidate Papers`: This view lists all the prospective papers that the scripts have calculated on the basis of the papers already present in the system.
 

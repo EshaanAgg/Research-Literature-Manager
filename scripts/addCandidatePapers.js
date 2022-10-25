@@ -81,8 +81,6 @@ const getCandidatePapers = async () => {
   ) {
     setTimeout(() => {
       console.log("Processing paper number " + (i + 1));
-      var rec = {};
-      var authors = [];
       axios
         .get(
           SEMANTIC_SCHOLAR_BASE_URL +
@@ -96,17 +94,16 @@ const getCandidatePapers = async () => {
           }
         )
         .then((response) => {
+          var rec = response.data;
+          var authors = [];
+
           rec.id = response.data.paperId;
-          rec.url = response.data.url;
-          rec.citationCount = response.data.citationCount;
-          rec.influentialCitationCount = response.data.influentialCitationCount;
-          rec.referenceCount = response.data.referenceCount;
           rec.summary = response.data.tldr.text;
-          rec.title = response.data.title;
-          rec.venue = response.data.venue;
-          rec.year = response.data.year;
           response.data.authors.forEach((obj) => authors.push(obj.name));
           rec.authors = String(authors);
+          delete rec.paperId;
+          delete rec.tldr;
+
           rec.score = res[i].frequency;
           papersToAdd.push(rec);
           console.log("Processed successfully.\n");

@@ -38,11 +38,9 @@ const getIdentifierFromURL = (url) => {
 };
 
 const getCurrentRecords = () => {
-  fs.readFileSync("./data/records.json", "utf8", (err, jsonString) => {
-    if (err) throw new Error("Error reading current records file from disk");
-    var papers = JSON.parse(jsonString);
-    currentPapers = papers.papers;
-  });
+  const jsonString = fs.readFileSync("./data/records.json", "utf8");
+  var papers = JSON.parse(jsonString);
+  currentPapers = papers.papers;
   currentPapers.forEach((paper) => currentPaperIDs.push(paper.id));
 };
 
@@ -71,10 +69,7 @@ const cleanup = () => {
     papers: currentPapers,
   });
 
-  fs.writeFileSync("./data/records.json", jsonContent, "utf8", (err) => {
-    if (err) throw new Error("Could not write data to records.json");
-    console.log("Updated records.json sucessfully.");
-  });
+  fs.writeFileSync("./data/records.json", jsonContent, "utf8");
   fs.writeFileSync(
     "./website/src/assets/data/records.json",
     jsonContent,
@@ -101,9 +96,6 @@ const addPapers = () => {
       var identifier = getIdentifierFromURL(pageLink);
 
       if (identifier) {
-        var rec = {};
-        var authors = [];
-
         axios
           .get(SEMANTIC_SCHOLAR_BASE_URL + identifier, {
             params: {
@@ -112,22 +104,16 @@ const addPapers = () => {
             },
           })
           .then((response) => {
+            var rec = response.data;
+            var authors = [];
+
             rec.id = response.data.paperId;
-            rec.url = response.data.url;
-            rec.citationCount = response.data.citationCount;
-            rec.influentialCitationCount =
-              response.data.influentialCitationCount;
-            rec.referenceCount = response.data.referenceCount;
-            rec.citations = response.data.citations;
-            rec.references = response.data.references;
             rec.summary = response.data.tldr.text;
-            rec.title = response.data.title;
-            rec.venue = response.data.venue;
-            rec.year = response.data.year;
             response.data.authors.forEach((obj) => authors.push(obj.name));
             rec.authors = String(authors);
+            delete rec.paperId;
+            delete rec.tldr;
 
-            // Add paper to the global list
             if (!currentPaperIDs.includes(rec.id)) {
               currentPaperIDs.push(rec.id);
               currentPapers.push(rec);
