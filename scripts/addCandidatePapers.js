@@ -14,6 +14,12 @@ function compare(a, b) {
   else return -1;
 }
 
+const formatDate = (date) => {
+  if (date == "" || date === null) return date;
+  const [year, month, day] = date.split("-");
+  return `${month}/${day}/${year}`;
+};
+
 const updateJSON = (papers) => {
   var jsonContent = JSON.stringify({
     papers: papers,
@@ -102,6 +108,7 @@ const getCandidatePapers = async () => {
           else rec.summary = "";
           response.data.authors.forEach((obj) => authors.push(obj.name));
           rec.authors = String(authors);
+          rec.publicationDate = formatDate(rec.publicationDate);
           delete rec.paperId;
           delete rec.tldr;
 

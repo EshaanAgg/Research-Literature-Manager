@@ -37,6 +37,12 @@ const getIdentifierFromURL = (url) => {
   return null;
 };
 
+const formatDate = (date) => {
+  if (date == "" || date === null) return date;
+  const [year, month, day] = date.split("-");
+  return `${month}/${day}/${year}`;
+};
+
 const getCurrentRecords = () => {
   const jsonString = fs.readFileSync("./data/records.json", "utf8");
   var papers = JSON.parse(jsonString);
@@ -100,7 +106,7 @@ const addPapers = () => {
           .get(SEMANTIC_SCHOLAR_BASE_URL + identifier, {
             params: {
               fields:
-                "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year,citations,references, publicationDate",
+                "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year,citations,references,publicationDate",
             },
           })
           .then((response) => {
@@ -112,6 +118,7 @@ const addPapers = () => {
             else rec.summary = "";
             response.data.authors.forEach((obj) => authors.push(obj.name));
             rec.authors = String(authors);
+            rec.publicationDate = formatDate(rec.publicationDate);
             delete rec.paperId;
             delete rec.tldr;
 
