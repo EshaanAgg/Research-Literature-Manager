@@ -89,7 +89,7 @@ const getCandidatePapers = async () => {
           {
             params: {
               fields:
-                "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year",
+                "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year,publicationDate",
             },
           }
         )

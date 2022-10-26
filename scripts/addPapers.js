@@ -100,7 +100,7 @@ const addPapers = () => {
           .get(SEMANTIC_SCHOLAR_BASE_URL + identifier, {
             params: {
               fields:
-                "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year,citations,references",
+                "paperId,url,referenceCount,citationCount,influentialCitationCount,title,tldr,authors,venue,year,citations,references, publicationDate",
             },
           })
           .then((response) => {

@@ -56,7 +56,7 @@ const columnDefs = ref({
       headerCheckboxSelection: true,
     },
     { field: "venue", minWidth: 80, width: 80, maxWidth: 120 },
-    { field: "year", maxWidth: 80 },
+    { field: "publicationDate", width: 100 },
     {
       headerName: "Score",
       field: "score",

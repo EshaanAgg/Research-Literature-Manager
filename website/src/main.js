@@ -9,11 +9,12 @@ import "./assets/main.css";
 // Using icons
 import {
   faAnglesLeft,
+  faAnglesRight,
   faHome,
   faBook,
   faQuestionCircle,
 } from "@fortawesome/free-solid-svg-icons";
-library.add([faAnglesLeft, faHome, faBook, faQuestionCircle]);
+library.add([faAnglesRight, faAnglesLeft, faHome, faBook, faQuestionCircle]);
 
 const app = createApp(App);
 app.use(router).component("fontAwesomeIcon", FontAwesomeIcon).mount("#app");

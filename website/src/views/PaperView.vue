@@ -58,7 +58,7 @@ const columnDefs = ref({
       autoHeight: true,
     },
     { field: "venue", minWidth: 80, width: 80 },
-    { field: "year", maxWidth: 80 },
+    { field: "publicationDate", width: 100 },
     {
       headerName: "Citation Count",
       field: "citationCount",

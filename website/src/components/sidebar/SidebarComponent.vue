@@ -20,12 +20,19 @@ import constants from "../../../constants.json";
       >Candidate Papers</SidebarLink
     >
 
-    <span
-      class="collapse-icon"
-      @click="toggleSidebar"
-      :class="{ 'rotate-180': collapsed }"
-    >
-      <fontAwesomeIcon icon="angles-left"></fontAwesomeIcon>
+    <span class="footer">
+      <div v-if="!collapsed">
+        Create your own living survey using
+        <a href="https://github.com/EshaanAgg/Research-Literature-Manager"
+          >this template</a
+        >
+        in under 60 seconds!!!!
+      </div>
+      <br />
+      <span @click="toggleSidebar">
+        <fontAwesomeIcon v-if="!collapsed" icon="angles-left"></fontAwesomeIcon>
+        <fontAwesomeIcon v-else icon="angles-right"></fontAwesomeIcon>
+      </span>
     </span>
   </div>
 </template>
@@ -56,7 +63,11 @@ import constants from "../../../constants.json";
 .sidebar h1 {
   height: 2.5em;
 }
-.collapse-icon {
+.footer a {
+  color: whitesmoke;
+  background-color: transparent;
+}
+.footer {
   position: absolute;
   bottom: 0;
   padding: 0.75em;
