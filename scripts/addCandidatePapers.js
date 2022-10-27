@@ -17,7 +17,7 @@ function compare(a, b) {
 const formatDate = (date) => {
   if (date == "" || date === null) return date;
   const [year, month, day] = date.split("-");
-  return `${month}/${day}/${year}`;
+  return `${day}/${month}/${year}`;
 };
 
 const updateJSON = (papers) => {
@@ -108,7 +108,9 @@ const getCandidatePapers = async () => {
           else rec.summary = "";
           response.data.authors.forEach((obj) => authors.push(obj.name));
           rec.authors = String(authors);
-          rec.publicationDate = formatDate(rec.publicationDate);
+          if (rec.publicationDate.length === 10)
+            rec.publicationDate = formatDate(rec.publicationDate);
+          else rec.publicationDate = rec.year;
           delete rec.paperId;
           delete rec.tldr;
 
