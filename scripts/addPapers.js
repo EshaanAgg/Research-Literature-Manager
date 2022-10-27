@@ -118,7 +118,7 @@ const addPapers = () => {
             else rec.summary = "";
             response.data.authors.forEach((obj) => authors.push(obj.name));
             rec.authors = String(authors);
-            if (rec.publicationDate.length === 10)
+            if (rec.publicationDate != "" && rec.publicationDate != null)
               rec.publicationDate = formatDate(rec.publicationDate);
             else rec.publicationDate = rec.year;
             delete rec.paperId;
