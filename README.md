@@ -65,6 +65,16 @@ You can use the checkboxes in the `Candidate Papers` view to select the papers t
 The scripts would then automatically start running, and get a new set of candidate papers to be added in your database.
 Since we are using GitHub, proper versioning of all the papers happens automatically in form of commits, and thus you can always rollback to your older versions if you want.
 
+### Downloading the data
+
+You can download the papers currently stored in your database in form of `csv` files.
+You can do so in two ways:
+
+1. `Using the Github UI`: Browse to `data` folder and then manually download `currentPapers.csv` and `candidatePapers.csv`.
+2. `Using direct URL`: Open the following links in your browser:
+   - `https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY_NAME>/main/data/currentPapers.csv`
+   - `https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY_NAME>/main/data/candidatePapers.csv`
+
 ### Notes
 
 1. If some papers could not be found using the links provided, those papers would be left in the `papersToAdd.txt` itself. You can try replacing them with some other link to add them to the database using the scripts.
