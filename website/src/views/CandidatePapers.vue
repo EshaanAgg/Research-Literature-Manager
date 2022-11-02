@@ -36,7 +36,6 @@ import constants from "../../constants.json";
 
 document.title = `${constants["website-title"]} | Candidate Papers`;
 
-
 function _monthToNum(date) {
   if (date.length === 4) return parseInt(date) * 10000;
   if (date === undefined || date === null || date.length !== 10) return null;
