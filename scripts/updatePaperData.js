@@ -76,7 +76,7 @@ const addPapers = () => {
     }, SEMANTIC_SCHOLAR_TIMEOUT * index);
   });
 
-  setTimeout(cleanup, SEMANTIC_SCHOLAR_TIMEOUT * (5 + papersToAdd.length));
+  setTimeout(cleanup, SEMANTIC_SCHOLAR_TIMEOUT * (5 + currentPapers.length));
 };
 
 const controlFunction = async () => {
