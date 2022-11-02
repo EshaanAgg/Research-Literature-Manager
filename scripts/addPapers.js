@@ -40,7 +40,7 @@ const getIdentifierFromURL = (url) => {
 const formatDate = (date) => {
   if (date == "" || date === null) return date;
   const [year, month, day] = date.split("-");
-  return `${month}/${day}/${year}`;
+  return `${day}/${month}/${year}`;
 };
 
 const getCurrentRecords = () => {
@@ -118,7 +118,9 @@ const addPapers = () => {
             else rec.summary = "";
             response.data.authors.forEach((obj) => authors.push(obj.name));
             rec.authors = String(authors);
-            rec.publicationDate = formatDate(rec.publicationDate);
+            if (rec.publicationDate != "" && rec.publicationDate != null)
+              rec.publicationDate = formatDate(rec.publicationDate);
+            else rec.publicationDate = rec.year;
             delete rec.paperId;
             delete rec.tldr;
 
