@@ -1,0 +1,29 @@
+name: "Update Paper Data"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14.x"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update Paper Data
+        run: node ./scripts/updatePaperData.js
+
+      - name: Commit changes to the database
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Update paper data"
