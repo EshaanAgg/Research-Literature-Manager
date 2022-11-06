@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import CandidatePapers from "../views/CandidatePapers.vue";
 import HomeView from "../views/HomeView.vue";
 import PaperView from "../views/PaperView.vue";
+import ImportFromBib from "../views/ImportFromBib.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/candidate",
       name: "candidate-papers",
       component: CandidatePapers,
+    },
+    {
+      path: "/import",
+      name: "import-from-bib",
+      component: ImportFromBib,
     },
   ],
 });

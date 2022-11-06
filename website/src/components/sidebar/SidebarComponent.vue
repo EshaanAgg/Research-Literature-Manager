@@ -19,6 +19,9 @@ import constants from "../../../constants.json";
     <SidebarLink to="/candidate" icon="question-circle"
       >Candidate Papers</SidebarLink
     >
+    <SidebarLink to="/import" icon="file-import"
+      >Import from Bib File</SidebarLink
+    >
 
     <span class="footer">
       <div v-if="!collapsed">

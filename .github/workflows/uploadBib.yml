@@ -1,0 +1,30 @@
+name: "Add Bib File"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**.bib"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14.x"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Read bib files and save data
+        run: node ./scripts/uploadBib.js
+
+      - name: Commit changes to records.json and currentPapers.csv
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Add new papers from bib files"
