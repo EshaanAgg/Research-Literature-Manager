@@ -7,7 +7,12 @@ const SEMANTIC_SCHOLAR_TIMEOUT = 4 * 1000;
 const papers = fs
   .readFileSync("./data/upload.bib", "utf-8")
   .replace(/(\r\n|\n|\r)/gm, "");
-var paperJSON = bibtexParse.toJSON(papers);
+
+try {
+  var paperJSON = bibtexParse.toJSON(papers);
+} catch (err) {
+  paperJSON = [];
+}
 
 const cleanup = () => {
   var jsonContent = JSON.stringify({
