@@ -1,22 +1,3 @@
-<style>
-.bottomText {
-  padding-top: 6px;
-}
-.papers-grid {
-  width: 100%;
-  height: 500px;
-  padding-left: 40px;
-  padding-right: 40px;
-}
-.ag-theme-alpine {
-  --ag-grid-size: 5px;
-  --ag-list-item-height: 20px;
-}
-.ag-cell-wrap-text {
-  word-break: break-word;
-}
-</style>
-
 <template>
   <div>
     <h1>Current Papers</h1>
@@ -28,11 +9,19 @@
       :defaultColDef="defaultColDef"
       rowSelection="multiple"
       animateRows="true"
+      :gridOptions="gridOptions"
     >
     </ag-grid-vue>
     <div class="bottomText">
       Displaying {{ recordsData.papers.length }} papers
     </div>
+    <button
+      @click="handleSelection"
+      class="selectionButton"
+      :disabled="isDisabled"
+    >
+      {{ buttonContent }}
+    </button>
   </div>
 </template>
 
@@ -43,6 +32,7 @@ import recordsData from "./../assets/data/records.json";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import constants from "../../constants.json";
+import bibtex from "@hygull/bibtex";
 
 document.title = `${constants["website-title"]} | Papers`;
 
@@ -68,6 +58,9 @@ function dateComparator(date1, date2) {
   return date1Number - date2Number;
 }
 const rowData = ref([]);
+const gridOptions = ref({});
+const buttonContent = ref("Add these papers!");
+const isDisabled = ref(false);
 
 const columnDefs = ref({
   value: [
@@ -79,6 +72,9 @@ const columnDefs = ref({
         return `<a href="${params.data.url}" target="_blank">${params.data.title}</a>`;
       },
       wrapText: true,
+      autoHeight: true,
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
     },
     { field: "venue", minWidth: 80, width: 80 },
     {
@@ -118,7 +114,117 @@ const defaultColDef = {
   flex: 1,
 };
 
+const downloadBib = () => {
+  // Generating the bib file text
+
+  const bib = new bibtex();
+  var selectedRows = gridOptions.value.api.getSelectedRows();
+  var downloadArr = [];
+  selectedRows.forEach((row) =>
+    downloadArr.push({
+      entryType: "article",
+      key: row.id,
+      data: row,
+    })
+  );
+
+  const bibCode = bib.getBibCodeFromObject(downloadArr, 1);
+
+  // Downloading the bib file
+  let filename = "export.bib";
+  let element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:application/json;charset=utf-8," + encodeURIComponent(bibCode)
+  );
+  element.setAttribute("download", filename);
+  element.style.display = "none";
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+};
+
+const handleSelection = () => {
+  buttonContent.value = "File is ready to download!";
+  isDisabled.value = true;
+
+  setTimeout(() => {
+    buttonContent.value = "Export these papers!";
+    isDisabled.value = false;
+  }, 2000);
+
+  downloadBib();
+};
+
 onMounted(() => {
   rowData.value = recordsData.papers;
 });
 </script>
+
+<style>
+.ag-cell-wrap-text {
+  word-break: break-word;
+}
+.selectionButton {
+  appearance: button;
+  background-color: var(--sidebar-item-active);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: din-round, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  margin-top: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 250px;
+}
+
+.selectionButton:after {
+  background-clip: padding-box;
+  background-color: var(--sidebar-item-hover);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.selectionButton:main,
+.selectionButton:focus {
+  user-select: auto;
+}
+
+.selectionButton:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.selectionButton:disabled {
+  cursor: auto;
+}
+</style>

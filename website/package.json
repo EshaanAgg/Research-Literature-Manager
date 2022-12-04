@@ -11,6 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
+    "@hygull/bibtex": "^1.1.23",
     "ag-grid-community": "^28.2.0",
     "ag-grid-vue3": "^28.2.0",
     "vue": "^3.2.41",
