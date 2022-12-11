@@ -75,6 +75,10 @@ You can do so in two ways:
    - `https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY_NAME>/main/data/currentPapers.csv`
    - `https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY_NAME>/main/data/candidatePapers.csv`
 
+### Using Bibfiles
+
+You can use bibfiles to import papers into the system as well. To do so, just copy the content of the bib file into `data/upload.bib` and wait for the automated scripts to run. Then you can add the papers to the system same as candidate papers.
+
 ### Notes
 
 1. If some papers could not be found using the links provided, those papers would be left in the `papersToAdd.txt` itself. You can try replacing them with some other link to add them to the database using the scripts.
