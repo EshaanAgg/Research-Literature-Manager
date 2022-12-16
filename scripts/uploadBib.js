@@ -37,8 +37,10 @@ const fetchLinks = async () => {
           `http://api.semanticscholar.org/graph/v1/paper/search?query=${paper.entryTags.TITLE}&fields=title,url`
         )
         .then((response) => {
-          paper.entryTags.url = response.data.data[0].url;
-          updatedPapers.push(paper);
+          if (response.data.total > 0) {
+            paper.entryTags.url = response.data.data[0].url;
+            updatedPapers.push(paper);
+          }
         });
     }, SEMANTIC_SCHOLAR_TIMEOUT * index);
   });
