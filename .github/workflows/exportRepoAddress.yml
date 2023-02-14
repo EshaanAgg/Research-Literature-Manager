@@ -16,7 +16,7 @@ jobs:
       - name: Write the repository URL
         run: echo '{"url":"https://github.com/${{ github.repository }}/" }' > ./website/src/assets/data/url.json
 
-      - name: Commit changes to records.json and currentPapers.csv
+      - name: Commit changes to url.json
         uses: EndBug/add-and-commit@v9
         with:
           message: "Updata repository URL"
