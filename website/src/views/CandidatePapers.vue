@@ -122,7 +122,7 @@ onMounted(() => {
 });
 
 const handleSelection = () => {
-  buttonContent.value = "Copied to clipboard!";
+  buttonContent.value = "Copied to clipboard! Paste these in papersToAdd.txt!";
   isDisabled.value = true;
 
   setTimeout(() => {

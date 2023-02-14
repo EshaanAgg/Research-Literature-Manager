@@ -53,6 +53,7 @@ const getCurrentRecords = () => {
 const updateCSV = () => {
   const fields = [
     "id",
+    "url",
     "title",
     "summary",
     "venue",
@@ -61,7 +62,6 @@ const updateCSV = () => {
     "citationCount",
     "referenceCount",
     "influentialCitationCount",
-    "url",
   ];
   const opts = { fields };
   const csvData = parse(currentPapers, opts);
