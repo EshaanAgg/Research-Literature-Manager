@@ -39,6 +39,8 @@ The projects ships with a simple website that you can use to easily view and vis
 6. Wait for Netlify to deploy your site! After the deployment is complete, your site would get a public URL that you can bookmark and use to view your papers any time!
    ![Step 6](assets/website/7.jpg)
 
+## Advanced Usage
+
 ### Customising the site content
 
 You can naviagte to the `webiste/constants.json` file and change the value of the following fields, which would be dynamically updated on the generated webiste.
