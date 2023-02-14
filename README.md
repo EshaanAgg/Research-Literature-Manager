@@ -51,12 +51,18 @@ You can naviagte to the `webiste/constants.json` file and change the value of th
 - `home-title`: The heading that appears on the landing page (home page) of the webite.
 - `home-description`: The content that is displayed on the landing page (home page) under the heading.
 
-##### Optional Step
+### Customising Your Domain
 
 You can go to your `Site Settings`, and then under the `Domain Management` Section, you can click on the `Domains` option to edit your randomly generated site name to something a little more you!
 ![Optional Step](assets/website/8.jpg)
 
-### Using the site
+### Candidate Paper Algorithm
+
+The algorithm that calculates the candidate papers resides in `scripts/addCandidatePapers.js`.
+
+Currently, the algorithm works by fetching all the citations of the papers already present in the database, and then filters out the most popular papers amoung them (which have been repeatedly cited). If you want to customise this, this script is where you can write your own candidate paper fetching algorithm.
+
+## Using the site
 
 You can access the various sections of the site using the side navigation.
 There are two primary pages:
@@ -69,7 +75,7 @@ You can use the checkboxes in the `Candidate Papers` view to select the papers t
 The scripts would then automatically start running, and get a new set of candidate papers to be added in your database.
 Since we are using GitHub, proper versioning of all the papers happens automatically in form of commits, and thus you can always rollback to your older versions if you want.
 
-### Downloading the data
+## Downloading the data
 
 You can download the papers currently stored in your database in form of `csv` files.
 You can do so in two ways:
@@ -79,11 +85,11 @@ You can do so in two ways:
    - `https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY_NAME>/main/data/currentPapers.csv`
    - `https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY_NAME>/main/data/candidatePapers.csv`
 
-### Using Bibfiles
+## Using Bibfiles
 
 You can use bibfiles to import papers into the system as well. To do so, just copy the content of the bib file into `data/upload.bib` and wait for the automated scripts to run. Then you can add the papers to the system same as candidate papers.
 
-### Notes
+## Notes
 
 1. If some papers could not be found using the links provided, those papers would be left in the `papersToAdd.txt` itself. You can try replacing them with some other link to add them to the database using the scripts.
 
@@ -94,7 +100,7 @@ You can use bibfiles to import papers into the system as well. To do so, just co
 4. By default, new candidate papers are fetched whenever new papers are added to the repository and on the first of every month. You can even manually run the script to fetch the papers. To do so, go to the `Actions` tab on your repository, and then choose `Add Candidate Papers` workflow. Then click on the `Run workflow` to manually run it.
    ![Manually run workflow](assets/manual_trigger.jpg)
 
-### Sample Input
+## Sample Input
 
 Here is a sample list of papers related to `Numbers in Text` that you can directly put in the `papersToAdd.txt` to quickly checkout the actions:-
 
@@ -126,7 +132,7 @@ https://arxiv.org/abs/2103.03874
 https://arxiv.org/abs/2103.07191
 ```
 
-### Contributors
+## Contributors
 
 This project is developed and maintained by [Avijit Thawani](https://avi-jit.github.io/) and [Eshaan Aggarwal](https://www.github.com/EshaanAgg).
 

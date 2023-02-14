@@ -36,6 +36,7 @@ const updateJSON = (papers) => {
 const updateCSV = (papers) => {
   const fields = [
     "id",
+    "url",
     "score",
     "title",
     "summary",
@@ -45,7 +46,6 @@ const updateCSV = (papers) => {
     "citationCount",
     "referenceCount",
     "influentialCitationCount",
-    "url",
   ];
   const opts = { fields };
   const csvData = parse(papers, opts);
