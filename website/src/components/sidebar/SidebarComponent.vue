@@ -2,6 +2,7 @@
 import { collapsed, toggleSidebar, sidebarWidth } from "./state";
 import SidebarLink from "./SidebarLink.vue";
 import constants from "../../../constants.json";
+import url from "../../assets/data/url.json"
 </script>
 
 <template>
@@ -21,6 +22,13 @@ import constants from "../../../constants.json";
     >
     <SidebarLink to="/import" icon="file-import"
       >Import from Bib File</SidebarLink
+    >
+
+    <br />
+    <br />
+    <br />
+    <SidebarLink :to="url.url" icon="backward"
+      >Take me to my Repo</SidebarLink
     >
 
     <span class="footer">

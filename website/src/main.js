@@ -14,6 +14,7 @@ import {
   faBook,
   faQuestionCircle,
   faFileImport,
+  faBackward,
 } from "@fortawesome/free-solid-svg-icons";
 library.add([
   faAnglesRight,
@@ -22,6 +23,7 @@ library.add([
   faBook,
   faQuestionCircle,
   faFileImport,
+  faBackward,
 ]);
 
 const app = createApp(App);

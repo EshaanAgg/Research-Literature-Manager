@@ -1,0 +1,22 @@
+name: "Export Repository URL"
+
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron: "0 0 * * 1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@v3
+
+      - name: Write the repository URL
+        run: echo '{"url":"https://github.com/${{ github.repository }}/" }' > ./website/src/assets/data/url.json
+
+      - name: Commit changes to records.json and currentPapers.csv
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Updata repository URL"

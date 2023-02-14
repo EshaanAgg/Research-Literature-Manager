@@ -12,16 +12,32 @@ const isActive = computed(() => route.path === props.to);
 </script>
 
 <template>
-  <router-link :to="props.to" class="link" :class="{ active: isActive }">
-    <div class="icon">
-      <fontAwesomeIcon :icon="props.icon" class="nav-icon" />
+  <div>
+    <div v-if="!props.to.includes('https')">
+      <router-link :to="props.to" class="link" :class="{ active: isActive }">
+        <div class="icon">
+          <fontAwesomeIcon :icon="props.icon" class="nav-icon" />
+        </div>
+        <transition name="fade">
+          <span v-if="!collapsed">
+            <slot />
+          </span>
+        </transition>
+      </router-link>
     </div>
-    <transition name="fade">
-      <span v-if="!collapsed">
-        <slot />
-      </span>
-    </transition>
-  </router-link>
+    <div v-else>
+      <a :href="props.to" class="link" :class="{ active: isActive }">
+        <div class="icon">
+          <fontAwesomeIcon :icon="props.icon" class="nav-icon" />
+        </div>
+        <transition name="fade">
+          <span v-if="!collapsed">
+            <slot />
+          </span>
+        </transition>
+      </a>
+    </div>
+  </div>
 </template>
 
 <style scoped>
