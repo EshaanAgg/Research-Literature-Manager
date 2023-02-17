@@ -1,18 +1,26 @@
 const fs = require("fs");
-const bibtexParse = require("bibtex-parser-js");
+const bibtexParse = require("bibtex-parse-js");
 const axios = require("axios");
 
 const SEMANTIC_SCHOLAR_TIMEOUT = 4 * 1000;
 
+console.log("Reading upload.bib...");
 const papers = fs
   .readFileSync("./data/upload.bib", "utf-8")
   .replace(/(\r\n|\n|\r)/gm, "");
+console.log("Read upload.bib in memory.");
 
+let paperJSON;
+console.log("Parsing the papers from the bib file. ");
 try {
-  var paperJSON = bibtexParse.toJSON(papers);
+  paperJSON = bibtexParse.toJSON(papers);
 } catch (err) {
+  console.log("ERROR...");
+  console.log(err);
   paperJSON = [];
 }
+console.log("Parsed all the papers.");
+console.log(`Number of papers found: ${paperJSON.length}`);
 
 const cleanup = () => {
   var jsonContent = JSON.stringify({
