@@ -82,9 +82,7 @@ const defaultColDef = {
 };
 
 onMounted(() => {
-  let data = [];
-  recordsData.papers.forEach((p) => data.push(p.entryTags));
-  rowData.value = data;
+  rowData.value = recordsData.papers;
 });
 
 const handleSelection = () => {

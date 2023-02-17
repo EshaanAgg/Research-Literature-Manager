@@ -1,6 +1,6 @@
 const fs = require("fs");
-const bibtexParse = require("bibtex-parse-js");
 const axios = require("axios");
+const bibtexParse = require("bibtex-parse");
 
 const SEMANTIC_SCHOLAR_TIMEOUT = 4 * 1000;
 
@@ -12,8 +12,9 @@ console.log("Read upload.bib in memory.");
 
 let paperJSON;
 console.log("Parsing the papers from the bib file. ");
+
 try {
-  paperJSON = bibtexParse.toJSON(papers);
+  paperJSON = bibtexParse.entries(papers);
 } catch (err) {
   console.log("ERROR...");
   console.log(err);
@@ -42,11 +43,11 @@ const fetchLinks = async () => {
       console.log(`Processing paper number ${index + 1}`);
       axios
         .get(
-          `http://api.semanticscholar.org/graph/v1/paper/search?query=${paper.entryTags.TITLE}&fields=title,url`
+          `http://api.semanticscholar.org/graph/v1/paper/search?query=${paper.TITLE}&fields=title,url`
         )
         .then((response) => {
           if (response.data.total > 0) {
-            paper.entryTags.url = response.data.data[0].url;
+            paper.url = response.data.data[0].url;
             updatedPapers.push(paper);
           }
         });
