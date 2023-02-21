@@ -1,6 +1,6 @@
-# Research Literature Manager
+# Living Surveys
 
-This is a project that makes it simple to manage the research papers you have read!
+This is a free and open source research literature manager that makes it simple to manage the research papers you have read!
 Here are some example Living Surveys that use this template:
 1. [Numeracy in NLP](https://numeracy-lit-review.netlify.app/papers)
 2. [Tokenization](https://tokenization-nlp.netlify.app/)
