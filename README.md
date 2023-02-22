@@ -4,7 +4,7 @@ This is a free and open source research literature manager that makes it simple 
 Here are some example Living Surveys that use this template:
 1. [Numeracy in NLP](https://numeracy-lit-review.netlify.app/papers)
 2. [Tokenization](https://tokenization-nlp.netlify.app/)
-3. [Code Language Models](https://codelm-lit-review.netlify.app/candidate)
+3. [Code Language Models](https://codelm-lit-review.netlify.app/)
 4. [Augmented Language Models](https://augmented-language-models.netlify.app/papers)
 
 ## How to Use
